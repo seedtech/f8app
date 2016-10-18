@@ -1,0 +1,25 @@
+version: '2'
+services:
+  db:
+    image: mongo:3.3
+    expose:
+        - 27017
+  web:
+    build: .
+    # command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+       - ./server:/parse/server
+       - ./scripts:/parse/scripts
+       - ./.babelrc:/parse/.babelrc
+       - ./.flowconfig:/parse/.flowconfig
+       - ./.eslintrc:/parse/.eslintrc
+    environment:
+        PORT: 8080
+        HOST: '0.0.0.0'
+        APP_ID: "f8-app-local"
+        DASHBOARD_AUTH: "admin:password"
+        DB_HOST: 'db'
+    ports:
+      - "8000:8080"
+    depends_on:
+      - db

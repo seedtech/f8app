@@ -24,9 +24,14 @@ import fetch from 'isomorphic-fetch';
 import Parse from 'parse/node';
 
 const SERVER_PORT = process.env.PORT || 8080;
+const APP_ID = process.env.APP_ID || 'oss-f8-app-2016';
+console.log(`App id ${APP_ID}`);
+Parse.initialize(APP_ID);
 
-Parse.initialize('oss-f8-app-2016');
 Parse.serverURL = `http://localhost:${SERVER_PORT}/parse`;
+const MASTER_KEY = process.env.MASTER_KEY || '70c6093dba5a7e55968a1c7ad3dd3e5a74ef5cac';
+Parse.masterKey = MASTER_KEY;
+Parse.Cloud.useMasterKey();
 
 const BLACKLISTED_KEYS = new Set(['objectId', 'createdAt', 'updatedAt']);
 const ID_MAP = new Map();

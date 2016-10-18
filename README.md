@@ -66,8 +66,28 @@ We've created a series of tutorials at [makeitopen.com](http://makeitopen.com/) 
 
   <img src=".github/screenshot-server@2x.png" width="800">
 
+## Setup with docker
 
-6. **Running on Android**:
+1. [Install Docker](https://docs.docker.com/engine/installation/)
+2.  ** Run Docker Compose **
+
+  ```
+  $ docker-compose up
+  ```
+
+3. ** Setup the database ** (Docker compose should be running)
+  ```
+  $ docker exec -it f8app_web_1 npm run import-data
+  ```
+
+  this assumes that `f8app_web_1` is the name
+
+4. Access the parse dashboard by visiting:
+
+* Parse Dashboard: [http://localhost:8000/dashboard](http://localhost:8000/dashboard)
+* Graph*i*QL: [http://localhost:8000/graphql](http://localhost:8000/graphql?query=query+%7B%0A++schedule+%7B%0A++++title%0A++++speakers+%7B%0A++++++name%0A++++++title%0A++++%7D%0A++++location+%7B%0A++++++name%0A++++%7D%0A++%7D%0A%7D)
+
+## **Running on Android**:
 
   ```
   $ react-native run-android
@@ -76,7 +96,7 @@ We've created a series of tutorials at [makeitopen.com](http://makeitopen.com/) 
   ```
 
 
-7. **Running on iOS:**
+## **Running on iOS:**
 
   ```
   $ react-native run-ios
